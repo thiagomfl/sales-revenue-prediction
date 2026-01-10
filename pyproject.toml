@@ -1,0 +1,86 @@
+[tool.poetry]
+name        = "sales-prediction"
+version     = "0.1.0"
+description = "Sales revenue prediction using ML"
+authors     = ["Thiago Moura <thmoura14@gmail.com>"]
+readme      = "README.md"
+license     = "MIT"
+packages    = [{include = "app"}, {include = "api"}, {include = "core"}]
+
+[tool.poetry.scripts]
+app = "app.streamlit_app:main"
+api = "api.infra.api.main:start"
+
+[tool.poe.tasks]
+check            = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/ && flake8 core/ api/ app/ tests/ && mypy core/ api/ app/"}
+format           = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/"}
+lint             = {shell = "flake8 core/ api/ app/ tests/"}
+notebook         = {shell = "jupyter notebook notebooks/"}
+test             = {shell = "python -m unittest discover -s tests -p 'test_*.py'"}
+test-unit        = {shell = "python -m unittest discover -s tests/unit -p 'test_*.py'"}
+test-integration = {shell = "python -m unittest discover -s tests/integration -p 'test_*.py'"}
+typecheck        = {shell = "mypy core/ api/ app/"}
+
+[tool.poetry.dependencies]
+python       = "^3.12"
+fastapi      = "^0.128.0"
+joblib       = "^1.5.3"
+matplotlib   = "^3.10.8"
+numpy        = "^2.4.1"
+pandas       = "^2.3.3"
+pydantic     = "^2.12.5"
+requests     = "^2.32.5"
+scikit-learn = "^1.8.0"
+seaborn      = "^0.13.2"
+streamlit    = "^1.52.2"
+uvicorn      = {extras = ["standard"], version = "^0.40.0"}
+
+[tool.poetry.group.dev.dependencies]
+black          = "^25.12.0"
+flake8         = "^7.3.0"
+httpx          = "^0.28.1"
+ipykernel      = "^7.1.0"
+isort          = "^7.0.0"
+jupyter        = "^1.1.1"
+mypy           = "^1.19.1"
+pandas-stubs   = "^2.3.3"
+poethepoet     = "^0.40.0"
+types-requests = "^2.32.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length    = 100
+target-version = ["py312"]
+include        = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.mypy_cache
+    | \.venv
+    | venv
+    | notebooks
+)/
+'''
+
+[tool.isort]
+line_length       = 100
+known_first_party = ["core", "api", "app"]
+profile           = "black"
+skip              = [".git", ".mypy_cache", ".venv", "venv", "notebooks"]
+
+[tool.mypy]
+python_version           = "3.12"
+check_untyped_defs       = true
+disallow_incomplete_defs = true
+disallow_untyped_defs    = true
+exclude                  = ["notebooks/", "tests/"]
+ignore_missing_imports   = true
+warn_return_any          = true
+warn_unused_ignores      = true
+
+[[tool.mypy.overrides]]
+disallow_untyped_defs = false
+module                = "tests.*"
