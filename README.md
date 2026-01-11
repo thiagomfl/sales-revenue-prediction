@@ -22,21 +22,21 @@ This project was developed as a hands-on exercise in building end-to-end ML appl
 The project follows **Clean Architecture** principles, ensuring separation of concerns and independence from external frameworks.
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    INFRASTRUCTURE                        │
+│                    INFRASTRUCTURE                       │
 │  ┌─────────────┐    ┌─────────────────────────────────┐ │
 │  │   FastAPI   │    │       ModelRepository           │ │
 │  │   Routes    │    │   (loads model from disk)       │ │
 │  └──────┬──────┘    └───────────────┬─────────────────┘ │
-│         │                           │                    │
-│         ▼                           ▼                    │
+│         │                           │                   │
+│         ▼                           ▼                   │
 │  ┌──────────────────────────────────────────────────┐   │
-│  │              APPLICATION (Use Cases)              │   │
-│  │            PredictRevenueUseCase                  │   │
+│  │              APPLICATION (Use Cases)             │   │
+│  │            PredictRevenueUseCase                 │   │
 │  └──────────────────────┬───────────────────────────┘   │
-│                         │                                │
-│                         ▼                                │
+│                         │                               │
+│                         ▼                               │
 │  ┌──────────────────────────────────────────────────┐   │
-│  │                    DOMAIN                         │   │
+│  │                    DOMAIN                        │   │
 │  │    SalesPredictionInput, SalesPredictionOutput   │   │
 │  └──────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────┘
