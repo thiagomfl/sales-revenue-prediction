@@ -7,12 +7,9 @@ readme      = "README.md"
 license     = "MIT"
 packages    = [{include = "app"}, {include = "api"}, {include = "core"}]
 
-[tool.poetry.scripts]
-app = "app.streamlit_app:main"
-api = "api.infrastructure.api.main:start"
-
 [tool.poe.tasks]
-api              = {cmd = "python run_api.py"}
+api              = {cmd   = "python run_api.py"}
+app              = {cmd   = "streamlit run app/streamlit_app.py"}
 check            = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/ && flake8 core/ api/ app/ tests/ && mypy core/ api/ app/"}
 format           = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/"}
 lint             = {shell = "flake8 core/ api/ app/ tests/"}
