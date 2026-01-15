@@ -5,7 +5,7 @@ loading the trained ML model and making predictions.
 
 from pathlib import Path
 
-import numpy as np
+import pandas as pd
 from sklearn.preprocessing import PolynomialFeatures
 
 from core.persistence import ModelLoader
@@ -23,6 +23,8 @@ class ModelRepository:
     model: Trained prediction model.
     metadata: Model metadata.
   """
+  FEATURE_NAMES = ['years_of_experience', 'number_of_sales', 'seasonal_factor']
+
   def __init__(self, models_dir: Path | str | None = None) -> None:
     """
     Initialize the repository and load the model.
@@ -55,10 +57,11 @@ class ModelRepository:
       Predicted revenue in BRL.
     """
     # Prepare input array
-    input_array = np.array([[experience_months, number_of_sales, seasonal_factor]])
+    input_df = pd.DataFrame(
+      [[experience_months, number_of_sales, seasonal_factor]], columns=self.FEATURE_NAMES)
 
     # Transform features
-    input_transformed = self.transformer.transform(input_array)
+    input_transformed = self.transformer.transform(input_df)
 
     # Make prediction
     prediction = self.model.predict(input_transformed)[0]
