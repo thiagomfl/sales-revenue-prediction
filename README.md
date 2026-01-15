@@ -100,10 +100,10 @@ The app will be available at `http://localhost:8501`.
 
 | Feature | Description |
 |---------|-------------|
-| `tempo_de_experiencia` | Seller's experience in months |
-| `numero_de_vendas` | Number of sales in a specific period |
-| `fator_sazonal` | Seasonality factor (1-10, where 10 = peak season) |
-| `receita_em_reais` | Total revenue generated (target variable) |
+| `years_of_experience` | Seller's experience in months |
+| `number_of_sales` | Number of sales in a specific period |
+| `seasonal_factor` | Seasonality factor (1-10, where 10 = peak season) |
+| `revenue_in_reais` | Total revenue generated (target variable) |
 
 ## 🧪 Model Comparison
 
@@ -172,25 +172,15 @@ curl -X POST "http://localhost:8000/predict" \
 }
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Please follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages.
-```
-feat(scope): add new feature
-fix(scope): fix bug
-docs: update documentation
-refactor(scope): refactor code
-test(scope): add tests
-chore: maintenance tasks
-```
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-**Thiago** - Senior Software Developer
+**Thiago** - Senior Software Engineer
+
+---
 
 - Experience with Python, TypeScript, Angular, and cloud technologies
 - Currently working on globalization and internationalization systems
