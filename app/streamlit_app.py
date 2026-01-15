@@ -5,22 +5,22 @@ This module provides an interactive web interface for making
 revenue predictions using the trained ML model.
 """
 
+import os
+
 import streamlit as st
 import requests
 
-# -----------------------------------------------------------------------------
-# Configuration
-# -----------------------------------------------------------------------------
+# Use environment variable for API URL, fallback to localhost for development
+API_URL = os.getenv('API_URL', 'http://localhost:8000')
 
-API_URL = "http://localhost:8000"
+# If API_URL comes from Render, it won't have the protocol
+if API_URL and not API_URL.startswith('http'):
+  API_URL = f'https://{API_URL}'
 
 st.set_page_config(
   page_title='Sales Revenue Prediction', page_icon='📈',
   layout='centered', initial_sidebar_state='collapsed')
 
-# -----------------------------------------------------------------------------
-# Custom CSS
-# -----------------------------------------------------------------------------
 
 st.markdown(
   """

@@ -1,0 +1,45 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Mypy
+.mypy_cache/
+
+# Data (keep only saved_models)
+data/
+
+# Development files
+*.md
+*.txt
+!requirements.txt
+tests/
+run_*.py
+.flake8

@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: sales-prediction-api
+    runtime: docker
+    dockerfilePath: ./docker/api.Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_ENV
+        value: production
+
+  - type: web
+    name: sales-prediction-app
+    runtime: docker
+    dockerfilePath: ./docker/app.Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_ENV
+        value: production
+      - key: API_URL
+        fromService:
+          name: sales-prediction-api
+          type: web
+          property: host
