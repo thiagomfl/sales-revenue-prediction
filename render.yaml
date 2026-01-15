@@ -21,7 +21,4 @@ services:
       - key: PYTHON_ENV
         value: production
       - key: API_URL
-        fromService:
-          name: sales-prediction-api
-          type: web
-          property: host
+        value: https://sales-prediction-api-yxum.onrender.com
