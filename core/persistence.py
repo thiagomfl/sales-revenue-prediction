@@ -27,7 +27,7 @@ class ModelLoader:
     Args:
       models_dir: Path to models directory. Uses default if None.
     """
-    self.models_dir = Path(models_dir) if models_dir else self.DEFAULT_MODEL_DIR
+    self.models_dir = Path(models_dir) if models_dir else self.DEFAULT_MODELS_DIR
 
   def save_model(self, model: Any, filename: str) -> Path:
     """

@@ -12,6 +12,7 @@ app = "app.streamlit_app:main"
 api = "api.infrastructure.api.main:start"
 
 [tool.poe.tasks]
+api              = {cmd = "python run_api.py"}
 check            = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/ && flake8 core/ api/ app/ tests/ && mypy core/ api/ app/"}
 format           = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/"}
 lint             = {shell = "flake8 core/ api/ app/ tests/"}
