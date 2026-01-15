@@ -9,7 +9,7 @@ packages    = [{include = "app"}, {include = "api"}, {include = "core"}]
 
 [tool.poetry.scripts]
 app = "app.streamlit_app:main"
-api = "api.infra.api.main:start"
+api = "api.infrastructure.api.main:start"
 
 [tool.poe.tasks]
 check            = {shell = "black core/ api/ app/ tests/ && isort core/ api/ app/ tests/ && flake8 core/ api/ app/ tests/ && mypy core/ api/ app/"}
