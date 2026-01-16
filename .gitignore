@@ -47,3 +47,8 @@ saved_models/*.pkl
 htmlcov/
 .coverage
 .coverage.*
+
+# Project specific
+saved_models/*.pkl
+!saved_models/.gitkeep
+!saved_models/*.joblib

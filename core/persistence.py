@@ -18,8 +18,6 @@ class ModelLoader:
   Attributes:
     models_dir: Path to the directory containing saved models.
   """
-  DEFAULT_MODELS_DIR = Path('saved_models')
-
   def __init__(self, models_dir: str | Path | None = None) -> None:
     """
     Initialize the model loader.
@@ -27,7 +25,35 @@ class ModelLoader:
     Args:
       models_dir: Path to models directory. Uses default if None.
     """
-    self.models_dir = Path(models_dir) if models_dir else self.DEFAULT_MODELS_DIR
+    if models_dir:
+      self.models_dir = Path(models_dir)
+    else:
+      self.models_dir = self._find_models_dir()
+
+  def _find_models_dir(self) -> Path:
+    """
+    Find the saved_models directory. Searches in common locations relative to the current working
+    directory and the module location.
+
+    Returns:
+      Path to the saved_models directory.
+
+    Raises:
+      FileNotFoundError: If saved_models directory cannot be found.
+    """
+    # Possible locations to search
+    possible_paths = [
+      Path('saved_models'),  # Current working directory
+      Path('/app/saved_models'),  # Docker container
+      Path(__file__).parent.parent / 'saved_models',  # Relative to this file
+    ]
+
+    for path in possible_paths:
+      if path.exists():
+        return path
+
+    # If not found, default to current directory (for saving new models)
+    return Path('saved_models')
 
   def save_model(self, model: Any, filename: str) -> Path:
     """
